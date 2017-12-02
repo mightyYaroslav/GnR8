@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Add</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="../lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="../stylesheets/album.css">
+    <link rel="stylesheet" type="text/css" href="../stylesheets/forms.css">
+    <link rel="stylesheet" type="text/css" href="../stylesheets/gallery.css">
+    <link rel="stylesheet" type="text/css" href="../stylesheets/background.css">
+</head>
+
+<body class="blur-background">
+<div class="mt-1 ml-2 mr-2">
+    <a href="albums.html"><i class="fa fa-music" aria-hidden="true"></i>Albums</a>
+<form
+        action="http://localhost:8080/albums/add"
+        method="post"
+        enctype="multipart/form-data"
+        onsubmit="add(this)"
+>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Title</label>
+        <div class="col-sm-10">
+            <input class="form-control" type="text" name="title" required>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Description</label>
+        <div class="col-sm-10">
+        <input class="form-control" type="text" name="description" required>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Rating</label>
+        <div class="col-sm-10">
+        <input class="form-control" name="rating" type="number" step="0.1" min="0" max="5" required>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Release date</label>
+        <div class="col-sm-10">
+        <input class="form-control" type="date" name="release_date" required>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Cover</label>
+        <div class="col-sm-10">
+            <input type="file" name="cover" class="form-control-file" required>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-sm-10">
+            <input type="submit" class='btn btn-dark' value="Add">
+        </div>
+    </div>
+</form>
+</div>
+
+<script src="../lib/handlebars.min-latest.js"></script>
+<script src="../lib/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+    function add(form) {
+        if(event.preventDefault)
+            event.preventDefault()
+        else
+            event.returnValue = false
+
+        var xhr = new XMLHttpRequest()
+        xhr.onreadystatechange = function() {
+            if(this.readyState === XMLHttpRequest.DONE) {
+                if (this.status === 200) {
+                    window.location.replace('albums.html')
+                } else {
+                    window.location.replace('error.html')
+                }
+            }
+        }
+        xhr.open(form.method, form.action, true)
+        xhr.setRequestHeader('Authorization', 'bearer ' + window.localStorage.getItem('token'))
+        xhr.send(new FormData(form))
+    }
+</script>
+</body>
+
+</html>

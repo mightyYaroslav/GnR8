@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script id="header-template" type="text/x-handlebars-template">
+        {{title}} ({{release_year}})
+    </script>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="../lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="../stylesheets/album.css">
+    <link rel="stylesheet" type="text/css" href="../stylesheets/forms.css">
+    <link rel="stylesheet" type="text/css" href="../stylesheets/gallery.css">
+    <link rel="stylesheet" type="text/css" href="../stylesheets/background.css">
+</head>
+
+<body class="blur-background">
+<a href="albums.html"><i class="fa fa-music" aria-hidden="true"></i>Albums</a>
+    <div class="album"></div>
+    <script id="album-template" type="text/x-handlebars-template">
+        <h1>{{title}} ({{release_year}})</h1>
+        <img src="data:image/jpg;base64,{{image}}">
+        <p>{{ description }}</p>
+    </script>
+</body>
+
+<script src="../lib/handlebars.min-latest.js"></script>
+<script src="../lib/bootstrap/js/bootstrap.min.js"></script>
+<script src="../js/album.js"></script>
+
+</html>

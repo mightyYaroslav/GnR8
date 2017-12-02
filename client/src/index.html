@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>GNR albums</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="../lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../stylesheets/album.css">
+    <link rel="stylesheet" type="text/css" href="../stylesheets/forms.css">
+    <link rel="stylesheet" type="text/css" href="../stylesheets/gallery.css">
+    <link rel="stylesheet" type="text/css" href="../stylesheets/background.css">
+</head>
+
+<body class="background">
+<div class="centered">
+    <h1>Welcome!</h1>
+    <p>This site is about Guns N' Roses albums</p>
+    <script id="login-template" type="text/x-handlebars-template">
+    {{#unless authorized}}
+        <a href="./login.html">Log in</a>
+    {{else}}
+        <a href="albums.html">Go to albums</a>
+    {{/unless}}
+    </script>
+    <span id="loginRef"></span>
+</div>
+
+<script src="../lib/handlebars.min-latest.js"></script>
+<script src="../lib/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+    var source = document.getElementById('login-template').innerHTML
+    var template = Handlebars.compile(source)
+    var context = {
+        authorized: window.localStorage.getItem('token') != null
+    }
+    document.getElementById('loginRef').innerHTML = template(context)
+</script>
+</body>
+
+</html>
